@@ -10,7 +10,7 @@ int main(void) {
 	try {
 		std::cin >> size;
 	}
-	catch (std::bad_exception e) {
+	catch (std::exception e) {
 		std::cout << e.what();
 		size = 200;
 	}
