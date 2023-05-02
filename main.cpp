@@ -6,7 +6,7 @@
 
 int main(void) {
 
-	Grid grid(300);
+	Grid grid(600);
 
 	return 0;
 }

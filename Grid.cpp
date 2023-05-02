@@ -32,9 +32,6 @@ void Grid::Run() {
 		grid_window.clear();
 		//inicia la aventura
 
-		box[5][5].setType(stateBox::start);
-		box[8][8].setType(stateBox::end);
-
 		onClick(grid_window);
 		for (itn_i = 0; itn_i < numbox; itn_i++) {
 			for (itn_j = 0; itn_j < numbox; itn_j++) {
@@ -74,12 +71,58 @@ void Grid::onClick(sf::RenderWindow &window) {
 		if (vector.x >= 0 && vector.x <= window.getSize().x && vector.y >= 0 && vector.y <= window.getSize().y) {
 			itn_x = vector.x / 20; itn_y = vector.y / 20;
 			if (box[itn_x][itn_y].geType() == stateBox::empty) {
-				box[itn_x][itn_y].setType(toDraw);
+				if (toDraw == stateBox::start) {
+					if (!startBox) {
+						startPos = { itn_x, itn_y };
+						startBox = true;
+						box[itn_x][itn_y].setType(toDraw);
+					}
+					else {
+						box[startPos.x][startPos.y].setType(stateBox::empty);
+						box[itn_x][itn_y].setType(toDraw);
+						startPos = { itn_x, itn_y };
+					}
+				}
+				else if (toDraw == stateBox::end){
+					if (!finishBox) {
+						finishPos = { itn_x, itn_y };
+						finishBox = true;
+						box[itn_x][itn_y].setType(toDraw);
+					}
+					else {
+						box[finishPos.x][finishPos.y].setType(stateBox::empty);
+						box[itn_x][itn_y].setType(toDraw);
+						finishPos = { itn_x, itn_y };
+					}
+				}else {
+					box[itn_x][itn_y].setType(toDraw);
+				}
 			}
 		}
 	}
 }
 
 void Grid::onClick_stateDraw() {
-
+	sf::Keyboard key;
+	if (key.isKeyPressed(sf::Keyboard::Enter)) {
+		std::cout << " You played enter \n";
+		std::this_thread::sleep_for(std::chrono::milliseconds(200));
+		switch (toDraw)
+		{
+		case stateBox::empty:
+			toDraw = stateBox::block;
+			break;
+		case stateBox::block:
+			toDraw = stateBox::start;
+			break;
+		case stateBox::start:
+			toDraw = stateBox::end;
+			break;
+		case stateBox::end:
+			toDraw = stateBox::block;
+			break;
+		default:
+			break;
+		}
+	}
 }

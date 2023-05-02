@@ -4,6 +4,9 @@
 #define GRID_H
 
 #include <iostream>
+#include <thread>
+#include <chrono>
+
 #include "SFML/Graphics.hpp"
 
 #include "Box.h"
@@ -16,7 +19,8 @@ private:
 	int size = 200;
 	int numbox = size / 20;
 
-	sf::Vector2f startPos, finishPos;
+	sf::Vector2i startPos, finishPos;
+	bool startBox = false, finishBox = false;
 
 	stateBox toDraw = stateBox::block;
 
