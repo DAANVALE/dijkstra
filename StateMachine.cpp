@@ -13,7 +13,3 @@ enum class stateCurrent {
 	search,
 	finish
 };
-
-enum class stateSize {
-
-};

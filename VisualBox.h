@@ -17,6 +17,8 @@ public:
 	void setType(stateBox state);
 	void setPos(sf::Vector2f position);
 
+	stateBox geType() { return state; }
+
 	sf::RectangleShape getBox() { return _box; }
 };
 

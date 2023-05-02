@@ -21,8 +21,10 @@ void VisualBox::setType(stateBox state) {
 		_box.setFillColor(sf::Color(0x212121FF));
 		break;
 	case stateBox::start:
+		_box.setFillColor(sf::Color(0x11FF22FF));
 		break;
 	case stateBox::end:
+		_box.setFillColor(sf::Color(0xFF0000FF));
 		break;
 	default:
 		break;
